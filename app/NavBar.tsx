@@ -3,11 +3,11 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation';
 import React from 'react'
-import { AiFillBug } from "react-icons/ai"; // https://react-icons.github.io/react-icons/
-import classNames from 'classnames';
+import { AiFillBug } from "react-icons/ai"; // https://react-icons.github.io/react-icons/   npm install react-icons@4.11.0
+import classNames from 'classnames'; // npm i classnames@2.3.2
 
 const NavBar = () => {
-    /* Current path declaration */
+    /* Current path declaration, use 'use client' */
     const currentPath = usePathname()
 
     /* Nav bar links */
