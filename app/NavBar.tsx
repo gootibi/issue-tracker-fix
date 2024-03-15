@@ -19,7 +19,7 @@ const NavBar = () => {
     return (
         <nav className='flex mb-5 px-5 h-14 space-x-6 border-b items-center'>
             {/* Logo element */}
-            <Link href='/'><AiFillBug /></Link>
+            <Link href='/'><AiFillBug className='text-black'/></Link>
             {/* Nav bar element => Dashboard , Issue */}
             <ul className='flex space-x-5'>
                 {links.map(link =>

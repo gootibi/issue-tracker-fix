@@ -38,3 +38,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 # Create schema, then go terminal:
 #         npx prisma format
 #         npx prisma migrate dev
+
+# Request data validation use Zod
+# npm i zod@3.22.2

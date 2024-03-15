@@ -2,7 +2,7 @@ import React from 'react'
 
 const IssuePage = () => {
   return (
-    <div>IssuePage</div>
+    <div className='text-black'>IssuePage</div>
   )
 }
 
