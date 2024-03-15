@@ -41,3 +41,20 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 # Request data validation use Zod
 # npm i zod@3.22.2
+
+# Set up radix-ui: https://www.radix-ui.com/themes/docs/overview/getting-started
+# npm install @radix-ui/themes
+# layout.tsx (root):
+# import '@radix-ui/themes/styles.css';
+# import { Theme } from '@radix-ui/themes';
+# export default function () {
+#  return (
+#    <html>
+#      <body>
+#        <Theme>
+#          <MyApp />
+#        </Theme>
+#      </body>
+#    </html>
+#  );
+# }
