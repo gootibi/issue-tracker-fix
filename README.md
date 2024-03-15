@@ -35,3 +35,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 # prisma: npm i prisma@5.3.1
 #         npx prisma init
+# Create schema, then go terminal:
+#         npx prisma format
+#         npx prisma migrate dev
