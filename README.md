@@ -58,3 +58,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 #    </html>
 #  );
 # }
+
+# radix-ui typography: https://www.radix-ui.com/themes/docs/theme/typography
+
