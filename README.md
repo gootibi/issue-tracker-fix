@@ -73,3 +73,5 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 # axios install to fetch
 # npm i axios@1.5.0
+
+# Validation: npm i @hookform/resolvers@3.3.1
