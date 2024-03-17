@@ -61,3 +61,10 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 # radix-ui typography: https://www.radix-ui.com/themes/docs/theme/typography
 
+# React SimpleMDE (EasyMDE) Markdown Editor use.
+# https://www.npmjs.com/package/react-simplemde-editor#install
+# Install: npm install --save react-simplemde-editor easymde
+# Use: import SimpleMDE from "react-simplemde-editor";
+#      import "easymde/dist/easymde.min.css";
+#      <SimpleMDE />;
+
