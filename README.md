@@ -75,3 +75,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 # npm i axios@1.5.0
 
 # Validation: npm i @hookform/resolvers@3.3.1
+
+# Tailwind element loading spinners: https://tw-elements.com/docs/standard/components/spinners/
+# Add spining the submit button and disable the submit button when onclick
