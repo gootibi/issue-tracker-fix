@@ -68,3 +68,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 #      import "easymde/dist/easymde.min.css";
 #      <SimpleMDE />;
 
+# https://react-hook-form.com/get-started
+# npm install react-hook-form@7.46.1
+
+# axios install to fetch
+# npm i axios@1.5.0
