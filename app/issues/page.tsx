@@ -1,21 +1,23 @@
 import prisma from '@/prisma/client'
-import { Button, Table } from '@radix-ui/themes'
-import Link from 'next/link'
+import { Table } from '@radix-ui/themes'
 import React from 'react'
 import IssueStatusBadge from '../components/IssueStatusBadge'
+import delay from 'delay'
+import IssueAction from './IssueAction'
 
 const IssuePage = async () => {
 
   const issues = await prisma.issue.findMany()
 
+  // Delay - simulate the slow server
+  await delay(2000)
+
   return (
     <div className='text-black'>
-      <div className='mb-5'>
-        <Button>
-          <Link href='/issues/new'>New Issue</Link>
-        </Button>
-      </div>
-      <Table.Root variant='surface'>
+      <IssueAction /> {/* Buttom component - New Issue */}
+      {/* Radix UI - Table element */}
+      <Table.Root variant='surface'> 
+        {/* Radix UI - Add Table Header element */}
         <Table.Header>
           <Table.Row>
             <Table.ColumnHeaderCell>Issue</Table.ColumnHeaderCell>
@@ -23,6 +25,7 @@ const IssuePage = async () => {
             <Table.ColumnHeaderCell className='hidden md:table-cell'>Created</Table.ColumnHeaderCell>
           </Table.Row>
         </Table.Header>
+        {/* Radix UI - Add Table Body element */}
         <Table.Body>
 
           {issues.map((issue) => (
@@ -30,11 +33,11 @@ const IssuePage = async () => {
               <Table.Cell>
                 {issue.title}
                 <div className='block md:hidden'>
-                  <IssueStatusBadge status={issue.status} />
+                  <IssueStatusBadge status={issue.status} /> {/* Add Badge component - IssueStatusBadge.tsx */}
                 </div>
               </Table.Cell>
               <Table.Cell className='hidden md:table-cell'>
-                <IssueStatusBadge status={issue.status} />
+                <IssueStatusBadge status={issue.status} /> {/* Add Badge component - IssueStatusBadge.tsx */}
               </Table.Cell>
               <Table.Cell className='hidden md:table-cell'>{issue.createdAt.toDateString()}</Table.Cell>
             </Table.Row>

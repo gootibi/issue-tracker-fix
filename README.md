@@ -78,3 +78,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 # Tailwind element loading spinners: https://tw-elements.com/docs/standard/components/spinners/
 # Add spining the submit button and disable the submit button when onclick
+
+# Delay - simulate the slow server
+
+# Loading Skeleton: npm i react-loading-skeleton@3.3.1 - https://www.npmjs.com/package/react-loading-skeleton
