@@ -19,6 +19,7 @@ model Issue {
   updatedAt   DateTime @updatedAt
 }
 
+// enum is a set constant value ->  name Status @default(...)
 enum Status {
   OPEN
   IN_PROGRESS

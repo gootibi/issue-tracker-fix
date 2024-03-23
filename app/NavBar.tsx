@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation';
 import React from 'react'
 import { AiFillBug } from "react-icons/ai"; // https://react-icons.github.io/react-icons/   npm install react-icons@4.11.0
-import classNames from 'classnames'; // npm i classnames@2.3.2
+import classNames from 'classnames'; // npm i classnames@2.3.2 - this give it strings that contains the classes we want to render, when the condition is tru that give it the string, help selecting navbar buttons styling.
 
 const NavBar = () => {
     /* Current path declaration, use 'use client' */
@@ -25,7 +25,7 @@ const NavBar = () => {
                 {links.map(link =>
                     <li key={link.href}>
                         <Link
-                            className={classNames({
+                            className={classNames({ // npm i classnames@2.3.2 - this give it strings that contains the classes we want to render, when the condition is tru that give it the string, help selecting navbar buttons styling.
                                 'text-zinc-900': link.href === currentPath,
                                 'text-zinc-500': link.href != currentPath,
                                 'hover:text-zinc-800 transition-colors': true,

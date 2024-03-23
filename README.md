@@ -61,20 +61,20 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 # radix-ui typography: https://www.radix-ui.com/themes/docs/theme/typography
 
-# React SimpleMDE (EasyMDE) Markdown Editor use.
+# React SimpleMDE (EasyMDE) Markdown Editor use. Google search: react-simplemde-editr
 # https://www.npmjs.com/package/react-simplemde-editor#install
 # Install: npm install --save react-simplemde-editor easymde
 # Use: import SimpleMDE from "react-simplemde-editor";
 #      import "easymde/dist/easymde.min.css";
 #      <SimpleMDE />;
 
-# https://react-hook-form.com/get-started
+# https://react-hook-form.com/get-started - Easy to handle form submission
 # npm install react-hook-form@7.46.1
 
 # axios install to fetch
 # npm i axios@1.5.0
 
-# Validation: npm i @hookform/resolvers@3.3.1
+# Validation: npm i @hookform/resolvers@3.3.1 // Integrate with various data validation libraries like zod
 
 # Tailwind element loading spinners: https://tw-elements.com/docs/standard/components/spinners/
 # Add spining the submit button and disable the submit button when onclick

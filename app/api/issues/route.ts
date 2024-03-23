@@ -7,7 +7,7 @@ export async function POST(request: NextRequest) {
     const validation = createIssueSchema.safeParse(body)
 
     if (!validation.success) {
-        return NextResponse.json(validation.error.format(), { status: 400 });
+        return NextResponse.json(validation.error.format(), { status: 400 }); // You can use the .format() method to convert this error into a nested object. validationSchema.ts
     }
 
     const newIssue = await prisma.issue.create({
