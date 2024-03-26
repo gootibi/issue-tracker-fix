@@ -1,21 +1,16 @@
 'use client'
 
-import { Button, Callout, Text, TextField } from '@radix-ui/themes'
-import { useForm, Controller } from 'react-hook-form';
-// import SimpleMDE from "react-simplemde-editor";
-import "easymde/dist/easymde.min.css";
+import { Button, Callout, TextField } from '@radix-ui/themes';
+import { Controller, useForm } from 'react-hook-form';
+import { Spinner, ErrorMessage} from '@/app/components'
+import { createIssueSchema } from '@/app/validationSchemas';
+import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
-// import { title } from 'process';
-// import { string, z } from 'zod';
-import { z } from 'zod';
+import "easymde/dist/easymde.min.css";
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { zodResolver } from "@hookform/resolvers/zod";
-import { createIssueSchema } from '@/app/validationSchemas';
-import ErrorMessage from '@/app/components/ErrorMessage';
-import Spinner from '@/app/components/Spinner';
-// import classNames from 'classnames';
-import dynamic from 'next/dynamic';
+import { z } from 'zod';
 
 /* Call dynamic function and import 'react-simplemde-editor' and set ssr false. SimpleMDE brovser api, can't run on server */
 const SimpleMDE = dynamic(

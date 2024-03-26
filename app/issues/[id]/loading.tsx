@@ -1,7 +1,6 @@
 /* Give it single issue page loading skeleton */
 import { Box, Card, Flex } from '@radix-ui/themes'
-import Skeleton from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
+import { Skeleton } from '@/app/components' // Inport components library on idex.tx file. Organization
 
 const LoadingIssueDetailPage = () => {
   return (
