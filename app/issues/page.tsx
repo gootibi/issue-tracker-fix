@@ -1,10 +1,10 @@
 import prisma from '@/prisma/client'
 import { Table } from '@radix-ui/themes'
+import Link from '../components/Link'
 import React from 'react'
 import IssueStatusBadge from '../components/IssueStatusBadge'
 import delay from 'delay'
 import IssueAction from './IssueAction'
-import Link from 'next/link'
 
 const IssuePage = async () => {
 
@@ -17,7 +17,7 @@ const IssuePage = async () => {
     <div className='text-black'>
       <IssueAction /> {/* Buttom component - New Issue */}
       {/* Radix UI - Table element */}
-      <Table.Root variant='surface'> 
+      <Table.Root variant='surface'>
         {/* Radix UI - Add Table Header element */}
         <Table.Header>
           <Table.Row>
@@ -28,12 +28,11 @@ const IssuePage = async () => {
         </Table.Header>
         {/* Radix UI - Add Table Body element */}
         <Table.Body>
-
           {issues.map((issue) => (
             <Table.Row key={issue.title}>
               <Table.Cell>
                 <Link href={`/issues/${issue.id}`}>
-                {issue.title}
+                  {issue.title}
                 </Link>
                 <div className='block md:hidden'>
                   <IssueStatusBadge status={issue.status} /> {/* Add Badge component - IssueStatusBadge.tsx */}
@@ -45,9 +44,7 @@ const IssuePage = async () => {
               <Table.Cell className='hidden md:table-cell'>{issue.createdAt.toDateString()}</Table.Cell>
             </Table.Row>
           ))}
-
         </Table.Body>
-
       </Table.Root>
     </div>
   )
