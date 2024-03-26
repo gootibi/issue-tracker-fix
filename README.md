@@ -89,3 +89,13 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 # Import in tailwind.config.ts file - in plugins array: require('@tailwindcss/typography')
 # And give it element className="prose".
 
+# Radix UI: Breakpoints - Built-in breakpoints allow you to easily build adaptive layouts.  
+# https://www.radix-ui.com/themes/docs/theme/breakpoints:
+#       - initial - Phones (portrait) - 0px
+#       - xs - Phones (landscape) - 520px ...
+
+# Radix UI: Icons: https://www.radix-ui.com/icons
+#           install: npm i @radix-ui/react-icons
+#           page.tsx: import { FaceIcon, ImageIcon, SunIcon } from '@radix-ui/react-icons'
+
+
