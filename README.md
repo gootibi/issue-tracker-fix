@@ -82,3 +82,10 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 # Delay - simulate the slow server
 
 # Loading Skeleton: npm i react-loading-skeleton@3.3.1 - https://www.npmjs.com/package/react-loading-skeleton
+
+# React Markdown: npm i react-markdown@8.0.4 
+#    - Help with the text edition and right rendering - /app/issues/[id]/page.tsx import: import ReactMarkdown from 'react-markdown' and give it.
+# And go google and search -> "tailwind typography" -> Introducing Tailwind CSS Typography https://tailwindcss.com/docs/plugins#typography - Install: npm install -D @tailwindcss/typography
+# Import in tailwind.config.ts file - in plugins array: require('@tailwindcss/typography')
+# And give it element className="prose".
+
