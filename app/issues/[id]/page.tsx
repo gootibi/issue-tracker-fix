@@ -4,6 +4,7 @@ import { Card, Flex, Heading, Text } from '@radix-ui/themes'
 import { notFound } from 'next/navigation'
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
+import delay from 'delay'
 
 interface Props {
     params: { id: string }
@@ -18,6 +19,9 @@ const IssueDetailPage = async ({ params }: Props) => {
     if (!issue) {
         notFound() // Never use "return" before the function. not found function, 404 This page could not be found. Auto generated page, when the id is not found
     }
+
+    // Delay - simulate the slow server - test loading skeleton
+    await delay(2000)
 
     return (
         <div>

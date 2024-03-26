@@ -10,7 +10,7 @@ const IssuePage = async () => {
 
   const issues = await prisma.issue.findMany()
 
-  // Delay - simulate the slow server
+  // Delay - simulate the slow server - test loading skeleton
   await delay(2000)
 
   return (
