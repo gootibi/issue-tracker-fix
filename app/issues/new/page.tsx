@@ -2,23 +2,31 @@
 
 import { Button, Callout, Text, TextField } from '@radix-ui/themes'
 import { useForm, Controller } from 'react-hook-form';
-import SimpleMDE from "react-simplemde-editor";
+// import SimpleMDE from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
 import axios from "axios";
-import { title } from 'process';
-import { string, z } from 'zod';
+// import { title } from 'process';
+// import { string, z } from 'zod';
+import { z } from 'zod';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createIssueSchema } from '@/app/validationSchemas';
 import ErrorMessage from '@/app/components/ErrorMessage';
 import Spinner from '@/app/components/Spinner';
-import classNames from 'classnames';
+// import classNames from 'classnames';
+import dynamic from 'next/dynamic';
+
+/* Call dynamic function and import 'react-simplemde-editor' and set ssr false. SimpleMDE brovser api, can't run on server */
+const SimpleMDE = dynamic(
+  () => import('react-simplemde-editor'),
+  { ssr: false }
+)
 
 type IssueForm = z.infer<typeof createIssueSchema>
 
 const newIssuePage = () => {
-  
+
   const router = useRouter()
   const { register, control, handleSubmit, formState: { errors } } = useForm<IssueForm>({
     resolver: zodResolver(createIssueSchema),
