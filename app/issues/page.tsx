@@ -4,6 +4,7 @@ import React from 'react'
 import IssueStatusBadge from '../components/IssueStatusBadge'
 import delay from 'delay'
 import IssueAction from './IssueAction'
+import Link from 'next/link'
 
 const IssuePage = async () => {
 
@@ -31,7 +32,9 @@ const IssuePage = async () => {
           {issues.map((issue) => (
             <Table.Row key={issue.title}>
               <Table.Cell>
+                <Link href={`/issues/${issue.id}`}>
                 {issue.title}
+                </Link>
                 <div className='block md:hidden'>
                   <IssueStatusBadge status={issue.status} /> {/* Add Badge component - IssueStatusBadge.tsx */}
                 </div>
