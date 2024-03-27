@@ -98,4 +98,15 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 #           install: npm i @radix-ui/react-icons
 #           page.tsx: import { FaceIcon, ImageIcon, SunIcon } from '@radix-ui/react-icons'
 
+Caching: in google search: "nextjs route segment config" -> https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config
+    Page build static - import client dynamic
+        Server cache refreshing:
+                // manual refresh the page -> the page data refresh:
+            - export const dynamic = "force-dynamic"   
+                // false | 0 | number -> Example: Every 30 seconds refresh the page
+            - export const revalidate = 30
+                ...
 
+        Client side ceche refreshing:
+            In IssueForm.tsx:
+            - router.refresh() // refresh the page automatically

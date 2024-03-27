@@ -49,4 +49,8 @@ const IssuePage = async () => {
   )
 }
 
+export const dynamic = "force-dynamic" // manual refresh the page -> the page data refresh. Server side caching refresh
+
+//export const revalidate = 30 // Example: Every 30 seconds refresh the page. Server side caching refresh.
+
 export default IssuePage

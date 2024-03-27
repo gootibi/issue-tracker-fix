@@ -40,6 +40,7 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
                 await axios.post('/api/issues', data); // create a new issue data in the database
             }
             router.push('/issues');
+            router.refresh(); // refresh the issues page (data). Clients side ceche refresh the issue data.
         } catch (error) {
             setIsSubmiting(false)
             setError('An unexpected error occured.')
