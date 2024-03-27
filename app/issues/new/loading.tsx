@@ -1,14 +1,4 @@
-/* Add loading skeleton with new issue page */
-import { Box } from '@radix-ui/themes'
-import { Skeleton } from '@/app/components' // Inport components library on idex.tx file. Organization
+/* Import and export loading skeleton with new issue page - put in page.tsx (new issue page) in dynamic function */
+import IssueFromSkeleton from "../_components/IssueFromSkeleton";
 
-const LoadingNewIssuePage = () => {
-  return (
-    <Box className='max-w-xl'>
-      <Skeleton />
-      <Skeleton height="20rem"/>
-    </Box>
-  )
-}
-
-export default LoadingNewIssuePage
+export default IssueFromSkeleton
