@@ -123,6 +123,9 @@ Next-Auth.js: https://next-auth.js.org/ or https://authjs.dev/?_gl=1*t9afjz*_gcl
 
                                                 export { handler as GET, handler as POST }
     
+    Google Cloud Console: https://console.cloud.google.com/
+                        Create API - Credentials...
+                        
 
 
 
