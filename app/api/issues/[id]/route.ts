@@ -1,6 +1,5 @@
 import { issueSchema } from "@/app/validationSchemas";
 import prisma from "@/prisma/client";
-import delay from "delay";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function PATCH(
@@ -42,7 +41,7 @@ export async function PATCH(
 export async function DELETE(
     request: NextRequest,
     { params }: { params: { id: string } }) {
-        
+
     //await delay(2000) // Delete issue button Spinner loading component test
 
     // Search in database with params ID

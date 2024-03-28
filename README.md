@@ -110,3 +110,19 @@ Caching: in google search: "nextjs route segment config" -> https://nextjs.org/d
         Client side ceche refreshing:
             In IssueForm.tsx:
             - router.refresh() // refresh the page automatically
+
+Next-Auth.js: https://next-auth.js.org/ or https://authjs.dev/?_gl=1*t9afjz*_gcl_au*MTU3Mzk2MzI4Mi4xNzExMDI5Njc4LjE0OTI0NDg4MDMuMTcxMTExNzgyNy4xNzExMTE3OTc2
+    Install: npm i next-auth@4.23.1
+    .env file create NEXTAUTH_URL and NEXTAUTH_SECRET - secret key create in Gith Bush prog. -> "openssl rand -base64 32"
+    Cretate: app/api/auth/[...nextauth]/route.ts : 
+                                                import NextAuth from "next-auth"
+
+                                                const handler = NextAuth({
+                                                    ...
+                                                })
+
+                                                export { handler as GET, handler as POST }
+    
+
+
+
