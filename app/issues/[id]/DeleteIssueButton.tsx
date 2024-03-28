@@ -25,7 +25,7 @@ const DeleteIssueButton = ({ issueId }: { issueId: number }) => {
       /* Add axios delete method, /api/issues/[id] - DELETE function in route */
       await axios.delete(`/api/issues/${issueId}`)
       /* Push the page on issues page */
-      router.push('/issues')
+      router.push('/issues/list')
       /* Refresh the issues page data, visibility the delete is done */
       router.refresh()
     } catch (error) {
