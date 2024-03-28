@@ -1,5 +1,6 @@
 'use client'
 
+import { Spinner } from '@/app/components'
 import { AlertDialog, Button, Flex } from '@radix-ui/themes'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
@@ -13,9 +14,13 @@ const DeleteIssueButton = ({ issueId }: { issueId: number }) => {
   /* Set the error state variable true, when the deleting is not working */
   const [error, setError] = useState(false)
 
+  /* Set the is deleting state variable true -> delete button loading spinner set */
+  const [isDeleting, setIsDeleting] = useState(false)
+
   /* Delete issue async onclick function - a have try and catch */
   const deleteIssue = async () => {
     try {
+      setIsDeleting(true) // delete button click set it true -> Spinner loading and disable the delete button
       //throw new Error() -- Error Alert Dialog test row
       /* Add axios delete method, /api/issues/[id] - DELETE function in route */
       await axios.delete(`/api/issues/${issueId}`)
@@ -24,6 +29,7 @@ const DeleteIssueButton = ({ issueId }: { issueId: number }) => {
       /* Refresh the issues page data, visibility the delete is done */
       router.refresh()
     } catch (error) {
+      setIsDeleting(false)
       setError(true)
     }
   }
@@ -33,8 +39,10 @@ const DeleteIssueButton = ({ issueId }: { issueId: number }) => {
       <AlertDialog.Root>
         {/* Alert dialog box triggerer - button (yet Delete Issue) */}
         <AlertDialog.Trigger>
-          <Button color='red'>
+          <Button color='red' disabled={isDeleting}>
             Delete Issue
+            {/* Set it, when isDeleting true add Spinner loading component on delete button */}
+            {isDeleting && <Spinner />}
           </Button>
         </AlertDialog.Trigger>
 
