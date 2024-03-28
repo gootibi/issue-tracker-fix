@@ -9,7 +9,7 @@ const IssueDetails = ({ issue }: { issue: Issue }) => {
             <Heading as='h1'>{issue.title}</Heading><Flex className='gap-3' my="2">
                 <IssueStatusBadge status={issue.status} />
                 <Text>{issue.createdAt.toDateString()}</Text>
-            </Flex><Card className='prose' my="4">
+            </Flex><Card className='prose max-w-full' my="4">
                 <ReactMarkdown>{issue.description}</ReactMarkdown>
             </Card>
         </>

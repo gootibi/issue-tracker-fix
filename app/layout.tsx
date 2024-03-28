@@ -1,10 +1,10 @@
+import { Container, Theme } from '@radix-ui/themes';
 import '@radix-ui/themes/styles.css';
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import './globals.css';
+import NavBar from './NavBar';
 import './theme-config.css';
-import './globals.css'
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import { Theme, ThemePanel } from '@radix-ui/themes';
-import NavBar from './NavBar'
 
 
 const inter = Inter({
@@ -28,7 +28,7 @@ export default function RootLayout({
         <Theme appearance="light" accentColor="iris">
           <NavBar />
           <main className='p-5'>
-            {children}
+          <Container>{children}</Container> {/* Raidix-ui <Container> -> applies a max width to our page and puts the content in the center */}
           </main>
         </Theme>
       </body>
