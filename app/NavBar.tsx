@@ -65,7 +65,7 @@ const AuthStatus = () => {
 
     if (status === 'unauthenticated') return <Link className='nav-link' href='/api/auth/signin'>Signin</Link>
 
-    if (status === 'loading') return <Spinner />
+    if (status === 'loading') return <Spinner /> // Add Skeleton (<Skeleton width="3rem" />) or Spinner (<Spinner />)
 
     return (
         <Box>
