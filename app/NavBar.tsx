@@ -5,10 +5,17 @@ import { usePathname } from 'next/navigation';
 import React from 'react'
 import { AiFillBug } from "react-icons/ai"; // https://react-icons.github.io/react-icons/   npm install react-icons@4.11.0
 import classNames from 'classnames'; // npm i classnames@2.3.2 - this give it strings that contains the classes we want to render, when the condition is tru that give it the string, help selecting navbar buttons styling.
+import { useSession } from 'next-auth/react';
+import { Box } from '@radix-ui/themes';
+import { Spinner } from './components';
 
 const NavBar = () => {
     /* Current path declaration, use 'use client' */
     const currentPath = usePathname()
+
+    /* That gives you access to the logged in user's session data - status (login, loading, logout) - data (username, email ect.) */
+    /* When use useSession, add the app <SessionProvider> */
+    const { status, data: session } = useSession()
 
     /* Nav bar links */
     const links = [
@@ -19,7 +26,7 @@ const NavBar = () => {
     return (
         <nav className='flex mb-5 px-5 h-14 space-x-6 border-b items-center'>
             {/* Logo element */}
-            <Link href='/'><AiFillBug className='text-black'/></Link>
+            <Link href='/'><AiFillBug className='text-black' /></Link>
             {/* Nav bar element => Dashboard , Issue */}
             <ul className='flex space-x-5'>
                 {links.map(link =>
@@ -35,6 +42,18 @@ const NavBar = () => {
                     </li>
                 )}
             </ul>
+            {/* Adding the Login and Logout Links + Loading spinner */}
+            <Box>
+                {status === 'authenticated' && (
+                    <Link href='/api/auth/signout'>Log out</Link>
+                )}
+                {status === 'unauthenticated' && (
+                    <Link href='/api/auth/signin'>Signin</Link>
+                )}
+                {status === 'loading' && (
+                    <Spinner />
+                )}
+            </Box>
         </nav>
     )
 }

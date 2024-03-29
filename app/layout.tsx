@@ -5,6 +5,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import NavBar from './NavBar';
 import './theme-config.css';
+import AuthProvider from './auth/Provider';
 
 
 const inter = Inter({
@@ -25,12 +26,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.variable}>
-        <Theme appearance="light" accentColor="iris">
-          <NavBar />
-          <main className='p-5'>
-          <Container>{children}</Container> {/* Raidix-ui <Container> -> applies a max width to our page and puts the content in the center */}
-          </main>
-        </Theme>
+        {/* Add AuthAdapter - /app/auth/Provider.tsx */}
+        <AuthProvider> 
+          <Theme appearance="light" accentColor="iris">
+            <NavBar />
+            <main className='p-5'>
+              <Container>{children}</Container> {/* Raidix-ui <Container> -> applies a max width to our page and puts the content in the center */}
+            </main>
+          </Theme>
+        </AuthProvider>
       </body>
     </html>
   )
