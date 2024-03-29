@@ -1,10 +1,19 @@
+import authOptions from "@/app/auth/authOptions";
 import { issueSchema } from "@/app/validationSchemas";
 import prisma from "@/prisma/client";
+import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function PATCH(
     request: NextRequest,
     { params }: { params: { id: string } }) {
+
+    // Login or Not successfully give it the session 
+    const session = await getServerSession(authOptions)
+    // Login not successful return error message
+    if (!session) {
+        return NextResponse.json({}, { status: 401 })
+    }
 
     const body = await request.json();
 
@@ -41,6 +50,13 @@ export async function PATCH(
 export async function DELETE(
     request: NextRequest,
     { params }: { params: { id: string } }) {
+
+    // Login or Not successfully give it the session 
+    const session = await getServerSession(authOptions)
+    // Login not successful return error message
+    if (!session) {
+        return NextResponse.json({}, { status: 401 })
+    }
 
     //await delay(2000) // Delete issue button Spinner loading component test
 
