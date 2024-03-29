@@ -6,7 +6,7 @@ import React from 'react'
 import { AiFillBug } from "react-icons/ai"; // https://react-icons.github.io/react-icons/   npm install react-icons@4.11.0
 import classNames from 'classnames'; // npm i classnames@2.3.2 - this give it strings that contains the classes we want to render, when the condition is tru that give it the string, help selecting navbar buttons styling.
 import { useSession } from 'next-auth/react';
-import { Box } from '@radix-ui/themes';
+import { Box, Container, Flex } from '@radix-ui/themes';
 import { Spinner } from './components';
 
 const NavBar = () => {
@@ -24,36 +24,42 @@ const NavBar = () => {
     ]
 
     return (
-        <nav className='flex mb-5 px-5 h-14 space-x-6 border-b items-center'>
-            {/* Logo element */}
-            <Link href='/'><AiFillBug className='text-black' /></Link>
-            {/* Nav bar element => Dashboard , Issue */}
-            <ul className='flex space-x-5'>
-                {links.map(link =>
-                    <li key={link.href}>
-                        <Link
-                            className={classNames({ // npm i classnames@2.3.2 - this give it strings that contains the classes we want to render, when the condition is tru that give it the string, help selecting navbar buttons styling.
-                                'text-zinc-900': link.href === currentPath,
-                                'text-zinc-500': link.href != currentPath,
-                                'hover:text-zinc-800 transition-colors': true,
-                            })}
-                            href={link.href}>{link.label}
-                        </Link>
-                    </li>
-                )}
-            </ul>
-            {/* Adding the Login and Logout Links + Loading spinner */}
-            <Box>
-                {status === 'authenticated' && (
-                    <Link href='/api/auth/signout'>Log out</Link>
-                )}
-                {status === 'unauthenticated' && (
-                    <Link href='/api/auth/signin'>Signin</Link>
-                )}
-                {status === 'loading' && (
-                    <Spinner />
-                )}
-            </Box>
+        <nav className='mb-5 px-5 py-3 border-b'>
+            <Container>
+                <Flex justify='between' gap="4" align="center">
+                    <Flex align="center" gap="3">
+                        {/* Logo element */}
+                        <Link href='/'><AiFillBug className='text-black' /></Link>
+                        {/* Nav bar element => Dashboard , Issue */}
+                        <ul className='flex space-x-5'>
+                            {links.map(link =>
+                                <li key={link.href}>
+                                    <Link
+                                        className={classNames({ // npm i classnames@2.3.2 - this give it strings that contains the classes we want to render, when the condition is tru that give it the string, help selecting navbar buttons styling.
+                                            'text-zinc-900': link.href === currentPath,
+                                            'text-zinc-500': link.href != currentPath,
+                                            'hover:text-zinc-800 transition-colors': true,
+                                        })}
+                                        href={link.href}>{link.label}
+                                    </Link>
+                                </li>
+                            )}
+                        </ul>
+                    </Flex>
+                    {/* Adding the Login and Logout Links + Loading spinner */}
+                    <Box>
+                        {status === 'authenticated' && (
+                            <Link href='/api/auth/signout'>Log out</Link>
+                        )}
+                        {status === 'unauthenticated' && (
+                            <Link href='/api/auth/signin'>Signin</Link>
+                        )}
+                        {status === 'loading' && (
+                            <Spinner />
+                        )}
+                    </Box>
+                </Flex>
+            </Container>
         </nav>
     )
 }
