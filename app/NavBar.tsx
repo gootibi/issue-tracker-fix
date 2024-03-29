@@ -60,6 +60,7 @@ const NavBar = () => {
                                         size='2'
                                         radius='full'
                                         className='cursor-pointer'
+                                        referrerPolicy='no-referrer' // no-referrer soloved the problem - Image get error 
                                     />
                                 </DropdownMenu.Trigger>
                                 {/* Add menu content - email, name and logout button */}
