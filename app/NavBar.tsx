@@ -1,12 +1,11 @@
 'use client'
 
-import Link from 'next/link'
-import { usePathname } from 'next/navigation';
-import React from 'react'
-import { AiFillBug } from "react-icons/ai"; // https://react-icons.github.io/react-icons/   npm install react-icons@4.11.0
+import { Avatar, Box, Container, DropdownMenu, Flex, Text } from '@radix-ui/themes';
 import classNames from 'classnames'; // npm i classnames@2.3.2 - this give it strings that contains the classes we want to render, when the condition is tru that give it the string, help selecting navbar buttons styling.
 import { useSession } from 'next-auth/react';
-import { Box, Container, Flex } from '@radix-ui/themes';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { AiFillBug } from "react-icons/ai"; // https://react-icons.github.io/react-icons/   npm install react-icons@4.11.0
 import { Spinner } from './components';
 
 const NavBar = () => {
@@ -49,7 +48,32 @@ const NavBar = () => {
                     {/* Adding the Login and Logout Links + Loading spinner */}
                     <Box>
                         {status === 'authenticated' && (
-                            <Link href='/api/auth/signout'>Log out</Link>
+                            //<Link href='/api/auth/signout'>Log out</Link>
+                            /* Add avatar dropdown menu image file - add menu item email, name and logout button content */
+                            <DropdownMenu.Root>
+                                {/* Add triger button -> yet avatar image */}
+                                <DropdownMenu.Trigger>
+                                    {/* Add avatar image */}
+                                    <Avatar
+                                        src={session.user!.image!}
+                                        fallback='?'
+                                        size='2'
+                                        radius='full'
+                                        className='cursor-pointer'
+                                    />
+                                </DropdownMenu.Trigger>
+                                {/* Add menu content - email, name and logout button */}
+                                <DropdownMenu.Content>
+                                    <DropdownMenu.Label>
+                                        <Text size='2'>{session.user!.email}</Text>
+                                    </DropdownMenu.Label>
+                                    <DropdownMenu.Label>
+                                        <Text size='2'>{session.user!.name}</Text>
+                                    </DropdownMenu.Label>
+                                    <DropdownMenu.Separator />
+                                    <DropdownMenu.Item><Link href='/api/auth/signout'>Log out</Link></DropdownMenu.Item>
+                                </DropdownMenu.Content>
+                            </DropdownMenu.Root>
                         )}
                         {status === 'unauthenticated' && (
                             <Link href='/api/auth/signin'>Signin</Link>
