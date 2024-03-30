@@ -2,10 +2,11 @@ import { Container, Theme } from '@radix-ui/themes';
 import '@radix-ui/themes/styles.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import AuthProvider from './auth/Provider';
 import './globals.css';
 import NavBar from './NavBar';
+import QueryClientProvider from './QueryClientProvider';
 import './theme-config.css';
-import AuthProvider from './auth/Provider';
 
 
 const inter = Inter({
@@ -26,15 +27,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.variable}>
-        {/* Add AuthAdapter - /app/auth/Provider.tsx */}
-        <AuthProvider> 
-          <Theme appearance="light" accentColor="iris">
-            <NavBar />
-            <main className='p-5'>
-              <Container>{children}</Container> {/* Raidix-ui <Container> -> applies a max width to our page and puts the content in the center */}
-            </main>
-          </Theme>
-        </AuthProvider>
+        {/* Use React Query - query client contains a cache for storing data we get from the backend  */}
+        <QueryClientProvider>
+          {/* Add AuthAdapter - /app/auth/Provider.tsx */}
+          <AuthProvider>
+            <Theme appearance="light" accentColor="iris">
+              <NavBar />
+              <main className='p-5'>
+                <Container>{children}</Container> {/* Raidix-ui <Container> -> applies a max width to our page and puts the content in the center */}
+              </main>
+            </Theme>
+          </AuthProvider>
+        </QueryClientProvider>
       </body>
     </html>
   )

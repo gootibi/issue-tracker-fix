@@ -126,6 +126,11 @@ Next-Auth.js: https://next-auth.js.org/ or https://authjs.dev/?_gl=1*t9afjz*_gcl
     Google Cloud Console: https://console.cloud.google.com/
                         Create API - Credentials...
                         
+Setting Up React Query: Google search -> tanstack react query (TanStack Query) -> https://tanstack.com/query/latest
+    Install: https://tanstack.com/query/latest/docs/framework/react/installation -> npm i @tanstack/react-query@4.35.3
+    Create: /app/QueryClientProvider.tsx -> This query client contains a cache for storing data we get from the backend
+
+
 
 
 
