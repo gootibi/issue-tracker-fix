@@ -1,12 +1,32 @@
 /* Create Select content element - From many users select one user. */
 'use client'
 
+import { Skeleton } from '@/app/components'
 import { User } from '@prisma/client'
 import { Select } from '@radix-ui/themes'
+import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
-import { useEffect, useState } from 'react'
 
 const AssigneeSelect = async () => {
+    /* Use React Query - backend and client cache */
+    const { data: users, error, isLoading } = useQuery<User[]>({
+        queryKey: ['users'],
+        queryFn: () => axios.get('/api/users').then(res => res.data), // This is a query function - here add the fetch function
+        staleTime: 60 * 1000, // 60 seconds automatical fetching from server
+        retry: 3, // 3 times retry the fetching, when the fetching is fails
+    })
+
+    /* When 3 times the fetching not completed - then return null */
+    if (error) {
+        return null
+    }
+
+    /* When the fetching in progress - until then loading the Skeleton component */
+    if (isLoading) {
+        return <Skeleton />
+    }
+
+    /*
     // Set users state
     const [users, setUsers] = useState<User[]>([])
 
@@ -22,7 +42,7 @@ const AssigneeSelect = async () => {
         // Call fetchUsers function
         fetchUsers()
     }, [])
-
+    */
 
     return (
         <Select.Root>{/* Select element - Radix-UI */}
@@ -32,7 +52,7 @@ const AssigneeSelect = async () => {
                     <Select.Label>Suggestions</Select.Label>
                     <Select.Separator />
                     {/* Call all users in (help useState and useEffect) */}
-                    {users.map(user => (
+                    {users?.map(user => (
                         <Select.Item key={user.id} value={user.id}>{user.name}</Select.Item>
                     ))}
                 </Select.Group>
