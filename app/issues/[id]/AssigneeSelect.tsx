@@ -10,12 +10,7 @@ import toast, { Toaster } from 'react-hot-toast'
 
 const AssigneeSelect = async ({ issue }: { issue: Issue }) => {
     /* Use React Query - backend and client cache */
-    const { data: users, error, isLoading } = useQuery<User[]>({
-        queryKey: ['users'],
-        queryFn: () => axios.get('/api/users').then(res => res.data), // This is a query function - here add the fetch function
-        staleTime: 60 * 1000, // 60 seconds automatical fetching from server
-        retry: 3, // 3 times retry the fetching, when the fetching is fails
-    })
+    const { data: users, error, isLoading } = useUsers()
 
     /* When 3 times the fetching not completed - then return null */
     if (error) {
@@ -25,6 +20,15 @@ const AssigneeSelect = async ({ issue }: { issue: Issue }) => {
     /* When the fetching in progress - until then loading the Skeleton component */
     if (isLoading) {
         return <Skeleton />
+    }
+
+    const assignIssue = (userId: string) => {
+        // Patch api/issues/[id] - set the issue assignedToUserId value to userId or null
+        axios
+            .patch("/api/issues/" + issue.id, {
+                assignedToUserId: userId === 'unassigned' ? null : userId
+            })
+            .catch(() => toast.error('Changes could not be saved')) // Set the error message in react-hot-toast
     }
 
     /*
@@ -49,14 +53,7 @@ const AssigneeSelect = async ({ issue }: { issue: Issue }) => {
         <>
             <Select.Root
                 defaultValue={issue.assignedToUserId || 'unassigned'} // default value is 'unassigned' or selected user
-                onValueChange={(userId) => {
-                    // Patch api/issues/[id] - set the issue assignedToUserId value to userId or null
-                    axios
-                        .patch("/api/issues/" + issue.id, {
-                            assignedToUserId: userId === 'unassigned' ? null : userId
-                        })
-                        .catch(() => toast.error('Changes could not be saved')) // Set the error message in react-hot-toast
-                }}>{/* Select element - Radix-UI */}
+                onValueChange={assignIssue}>{/* Select element - Radix-UI */}
                 <Select.Trigger placeholder='Assign...' />
                 <Select.Content>
                     <Select.Group>
@@ -72,9 +69,16 @@ const AssigneeSelect = async ({ issue }: { issue: Issue }) => {
                 </Select.Content>
             </Select.Root>
             {/* Put the Toaster component. It is visible, when the patch get error (backend error). It is visible top of center few seconds. */}
-            <Toaster /> 
+            <Toaster />
         </>
     )
 }
+
+const useUsers = () => useQuery<User[]>({
+    queryKey: ['users'],
+    queryFn: () => axios.get('/api/users').then(res => res.data), // This is a query function - here add the fetch function
+    staleTime: 60 * 1000, // 60 seconds automatical fetching from server
+    retry: 3, // 3 times retry the fetching, when the fetching is fails
+})
 
 export default AssigneeSelect
