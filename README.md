@@ -130,6 +130,21 @@ Setting Up React Query: Google search -> tanstack react query (TanStack Query) -
     Install: https://tanstack.com/query/latest/docs/framework/react/installation -> npm i @tanstack/react-query@4.35.3
     Create: /app/QueryClientProvider.tsx -> This query client contains a cache for storing data we get from the backend
 
+React Hot Toast: https://react-hot-toast.com/ - when backend fails show the toast notification for user
+    Install: npm i react-hot-toast@2.4.1
+    Use: AssigneeSelect.tsx
+            ...
+            import toast, { Toaster } from 'react-hot-toast'
+            ...
+            axios
+                .patch(...)
+                .catch(() => toast.error('Changes could not be saved'))
+            ...
+            <Toaster />
+            ...
+
+
+
 
 
 
