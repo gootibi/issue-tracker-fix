@@ -1,16 +1,28 @@
+import { IssueStatusBadge, Link } from '@/app/components'
 import prisma from '@/prisma/client'
+import { Status } from '@prisma/client'
 import { Table } from '@radix-ui/themes'
-import { Link, IssueStatusBadge } from '@/app/components'
-import React from 'react'
-import delay from 'delay'
 import IssueAction from './IssueAction'
 
-const IssuePage = async () => {
+interface Props {
+  searchParams: { status: Status }
+}
 
-  const issues = await prisma.issue.findMany()
+const IssuePage = async ({ searchParams }: Props) => {
+  //console.log(searchParams.status)
+
+  const statuses = Object.values(Status) // set statuses array - ["OPEN" | "IN_PROGRESS" | "CLOSED"]
+  // console.log(statuses)
+  // validation: statuses includes status then search params, or not including then undefined -> all data find and load 
+  const status = statuses.includes(searchParams.status) ? searchParams.status : undefined
+
+  // When status undefined loading all data
+  const issues = await prisma.issue.findMany({
+    where: { status },
+  })
 
   // Delay - simulate the slow server - test loading skeleton
-  await delay(2000)
+  //await delay(2000)
 
   return (
     <div className='text-black'>
