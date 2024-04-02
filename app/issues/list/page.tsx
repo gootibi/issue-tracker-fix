@@ -1,15 +1,28 @@
 import { IssueStatusBadge, Link } from '@/app/components'
 import prisma from '@/prisma/client'
-import { Status } from '@prisma/client'
+import { Issue, Status } from '@prisma/client'
+import { ArrowUpIcon } from '@radix-ui/react-icons'
 import { Table } from '@radix-ui/themes'
+import NextLink from 'next/link'
 import IssueAction from './IssueAction'
 
 interface Props {
-  searchParams: { status: Status }
+  searchParams: { status: Status, orderBy: keyof Issue }
 }
 
 const IssuePage = async ({ searchParams }: Props) => {
   //console.log(searchParams.status)
+
+  /* Set the Column Header Cell label and value and className (optional) in array - dynamic render */
+  const columns: {
+    label: string;
+    value: keyof Issue;
+    className?: string;
+  }[] = [
+      { label: 'Issue', value: 'title' },
+      { label: 'Status', value: 'status', className: 'hidden md:table-cell' },
+      { label: 'Created', value: 'createdAt', className: 'hidden md:table-cell' },
+    ]
 
   const statuses = Object.values(Status) // set statuses array - ["OPEN" | "IN_PROGRESS" | "CLOSED"]
   // console.log(statuses)
@@ -32,9 +45,16 @@ const IssuePage = async ({ searchParams }: Props) => {
         {/* Radix UI - Add Table Header element */}
         <Table.Header>
           <Table.Row>
-            <Table.ColumnHeaderCell>Issue</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell className='hidden md:table-cell'>Status</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell className='hidden md:table-cell'>Created</Table.ColumnHeaderCell>
+            {/* Dynamic render the label and value in Header Cell */}
+            {columns.map((column) => (
+              <Table.ColumnHeaderCell key={column.value}>
+                {/* Set the order by in top of table, and add the icon on selected header element */}
+                <NextLink href={{
+                  query: { ...searchParams, orderBy: column.value }
+                }}>{column.label}</NextLink>
+                {column.value === searchParams.orderBy && <ArrowUpIcon className='inline' />}
+              </Table.ColumnHeaderCell>
+            ))}
           </Table.Row>
         </Table.Header>
         {/* Radix UI - Add Table Body element */}
