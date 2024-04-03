@@ -1,4 +1,5 @@
 import { IssueStatusBadge, Link } from '@/app/components'
+import Pagination from '@/app/components/Pagination'
 import prisma from '@/prisma/client'
 import { Issue, Status } from '@prisma/client'
 import { ArrowUpIcon } from '@radix-ui/react-icons'
@@ -7,7 +8,11 @@ import NextLink from 'next/link'
 import IssueAction from './IssueAction'
 
 interface Props {
-  searchParams: { status: Status, orderBy: keyof Issue }
+  searchParams: {
+    status: Status,
+    orderBy: keyof Issue,
+    page: string,
+  }
 }
 
 const IssuePage = async ({ searchParams }: Props) => {
@@ -36,10 +41,24 @@ const IssuePage = async ({ searchParams }: Props) => {
     ? { [searchParams.orderBy]: 'asc' }
     : undefined
 
+  // Set page value - search params or 1
+  const page = parseInt(searchParams.page) || 1
+
+  // Set page size - hardcoded page size
+  const pageSize = 10
+
   // When status undefined loading all data, and add the orderBy property
   const issues = await prisma.issue.findMany({
     where: { status },
-    orderBy
+    orderBy,
+    /* Add skip and take https://www.prisma.io/docs/orm/prisma-client/queries/pagination */
+    skip: (page - 1) * pageSize,
+    take: pageSize
+  })
+
+  // Set issues data count
+  const issueCount = await prisma.issue.count({
+    where: { status },
   })
 
   // Delay - simulate the slow server - test loading skeleton
@@ -85,6 +104,7 @@ const IssuePage = async ({ searchParams }: Props) => {
           ))}
         </Table.Body>
       </Table.Root>
+      <Pagination currentPage={page} itemCount={issueCount} pageSize={pageSize} />
     </div>
   )
 }
