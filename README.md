@@ -143,6 +143,20 @@ React Hot Toast: https://react-hot-toast.com/ - when backend fails show the toas
             <Toaster />
             ...
 
+Generating Dummy Data: ChatGPT: https://chat.openai.com/
+    Message: 
+        Give the following prisma model, generate SQL statement to insert 20 records in the issues table. Use real-world titles and descriptions for issues. Status can be OPEN, IN_PROGRES or CLOSED. Descriptions should be a paragraph long. Provide different values for the createdAt and updatedAt columns.  
+
+        model Issue {
+            id               Int      @id @default(autoincrement())
+            title            String   @db.VarChar(255)
+            description      String   @db.Text
+            status           Status   @default(OPEN)
+            createdAt        DateTime @default(now())
+            updatedAt        DateTime @updatedAt
+        }
+
+        
 
 
 
