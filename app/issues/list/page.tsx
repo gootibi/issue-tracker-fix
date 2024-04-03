@@ -55,7 +55,7 @@ const IssuePage = async ({ searchParams }: Props) => {
           <Table.Row>
             {/* Dynamic render the label and value in Header Cell */}
             {columns.map((column) => (
-              <Table.ColumnHeaderCell key={column.value}>
+              <Table.ColumnHeaderCell key={column.value} className={column.className}>
                 {/* Set the order by in top of table, and add the icon on selected header element */}
                 <NextLink href={{
                   query: { ...searchParams, orderBy: column.value }
