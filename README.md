@@ -156,7 +156,10 @@ Generating Dummy Data: ChatGPT: https://chat.openai.com/
             updatedAt        DateTime @updatedAt
         }
 
-        
+Reacharts: grafikon maker api https://recharts.org/en-US/     
+    Install: npm install recharts@2.8.0
+    Add /app/IssueChart.tsx - set the bar chart.
+    
 
 
 
