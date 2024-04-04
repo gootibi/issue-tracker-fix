@@ -1,33 +1,16 @@
-import { IssueStatusBadge, Link } from '@/app/components'
 import Pagination from '@/app/components/Pagination'
 import prisma from '@/prisma/client'
-import { Issue, Status } from '@prisma/client'
-import { ArrowUpIcon } from '@radix-ui/react-icons'
-import { Table } from '@radix-ui/themes'
-import NextLink from 'next/link'
+import { Status } from '@prisma/client'
 import IssueAction from './IssueAction'
+import IssueTable, { columnNames, IssueQuery } from './IssueTable'
+import { Flex } from '@radix-ui/themes'
 
 interface Props {
-  searchParams: {
-    status: Status,
-    orderBy: keyof Issue,
-    page: string,
-  }
+  searchParams: IssueQuery
 }
 
 const IssuePage = async ({ searchParams }: Props) => {
   //console.log(searchParams.status)
-
-  /* Set the Column Header Cell label and value and className (optional) in array - dynamic render */
-  const columns: {
-    label: string;
-    value: keyof Issue;
-    className?: string;
-  }[] = [
-      { label: 'Issue', value: 'title' },
-      { label: 'Status', value: 'status', className: 'hidden md:table-cell' },
-      { label: 'Created', value: 'createdAt', className: 'hidden md:table-cell' },
-    ]
 
   const statuses = Object.values(Status) // set statuses array - ["OPEN" | "IN_PROGRESS" | "CLOSED"]
   // console.log(statuses)
@@ -35,8 +18,7 @@ const IssuePage = async ({ searchParams }: Props) => {
   const status = statuses.includes(searchParams.status) ? searchParams.status : undefined
 
   // Validation and set the orderBy property, when searchParams.orderBy includes columns array values set { [searchParams.orderBy]: 'asc' } or not -> undefined
-  const orderBy = columns
-    .map(column => column.value)
+  const orderBy = columnNames
     .includes(searchParams.orderBy)
     ? { [searchParams.orderBy]: 'asc' }
     : undefined
@@ -65,47 +47,12 @@ const IssuePage = async ({ searchParams }: Props) => {
   //await delay(2000)
 
   return (
-    <div className='text-black'>
+    <Flex direction='column' gap='3' className='text-black'>
       <IssueAction /> {/* Buttom component - New Issue */}
       {/* Radix UI - Table element */}
-      <Table.Root variant='surface'>
-        {/* Radix UI - Add Table Header element */}
-        <Table.Header>
-          <Table.Row>
-            {/* Dynamic render the label and value in Header Cell */}
-            {columns.map((column) => (
-              <Table.ColumnHeaderCell key={column.value} className={column.className}>
-                {/* Set the order by in top of table, and add the icon on selected header element */}
-                <NextLink href={{
-                  query: { ...searchParams, orderBy: column.value }
-                }}>{column.label}</NextLink>
-                {column.value === searchParams.orderBy && <ArrowUpIcon className='inline' />}
-              </Table.ColumnHeaderCell>
-            ))}
-          </Table.Row>
-        </Table.Header>
-        {/* Radix UI - Add Table Body element */}
-        <Table.Body>
-          {issues.map((issue) => (
-            <Table.Row key={issue.title}>
-              <Table.Cell>
-                <Link href={`/issues/${issue.id}`}>
-                  {issue.title}
-                </Link>
-                <div className='block md:hidden'>
-                  <IssueStatusBadge status={issue.status} /> {/* Add Badge component - IssueStatusBadge.tsx */}
-                </div>
-              </Table.Cell>
-              <Table.Cell className='hidden md:table-cell'>
-                <IssueStatusBadge status={issue.status} /> {/* Add Badge component - IssueStatusBadge.tsx */}
-              </Table.Cell>
-              <Table.Cell className='hidden md:table-cell'>{issue.createdAt.toDateString()}</Table.Cell>
-            </Table.Row>
-          ))}
-        </Table.Body>
-      </Table.Root>
+      <IssueTable searchParams={searchParams} issues={issues}/>
       <Pagination currentPage={page} itemCount={issueCount} pageSize={pageSize} />
-    </div>
+    </Flex>
   )
 }
 

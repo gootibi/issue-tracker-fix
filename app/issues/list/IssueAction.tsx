@@ -6,7 +6,7 @@ import IssueStatusFilter from './IssueStatusFilter'
 // Add "New Issue" button component
 const IssueAction = () => {
     return (
-        <Flex mb='5' justify='between'>
+        <Flex justify='between'>
             {/* Set the select status component */}
             <IssueStatusFilter />
             {/* Set the new Issue button */}
