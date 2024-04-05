@@ -3,6 +3,7 @@ import { Box, Flex, Grid } from '@radix-ui/themes'
 import delay from 'delay'
 import { getServerSession } from 'next-auth'
 import { notFound } from 'next/navigation'
+import { cache } from 'react'
 import AssigneeSelect from './AssigneeSelect'
 import DeleteIssueButton from './DeleteIssueButton'
 import EditIssueButton from './EditIssueButton'
@@ -12,13 +13,14 @@ interface Props {
     params: { id: string }
 }
 
+// Use react cache
+const fetchIssue = cache((issueId: number) => prisma.issue.findUnique({ where: { id: issueId } }))
+
 const IssueDetailPage = async ({ params }: Props) => {
 
     const session = await getServerSession()
 
-    const issue = await prisma.issue.findUnique({
-        where: { id: parseInt(params.id) },
-    })
+    const issue = await fetchIssue(parseInt(params.id))
 
     if (!issue) {
         notFound() // Never use "return" before the function. not found function, 404 This page could not be found. Auto generated page, when the id is not found
@@ -46,7 +48,7 @@ const IssueDetailPage = async ({ params }: Props) => {
 
 // Add dynamic metadata
 export async function generateMetadata({ params }: Props) {
-    const issue = await prisma.issue.findUnique({ where: { id: parseInt(params.id) } })
+    const issue = await fetchIssue(parseInt(params.id))
     return {
         title: issue?.title,
         description: `Details of issue id: ${issue?.id}`
