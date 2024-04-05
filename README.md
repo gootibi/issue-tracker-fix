@@ -175,6 +175,12 @@ Metadata: add static and dynamic metadata
             }
         }
 
+Clear .env commit: download python 
+        Add .env.example -> clear the code
+        Google search: git filter repo -> https://github.com/newren/git-filter-repo
+        Download here: git-filter-repo.txt -> copy root folder and rename git-filter-repo.py
+        Console: python3 git-filter-repo.py --path .env --invert-paths --force
+        The .env commit is cleared
 
 
 
