@@ -159,7 +159,21 @@ Generating Dummy Data: ChatGPT: https://chat.openai.com/
 Reacharts: grafikon maker api https://recharts.org/en-US/     
     Install: npm install recharts@2.8.0
     Add /app/IssueChart.tsx - set the bar chart.
-    
+
+Metadata: add static and dynamic metadata
+    Static:
+        export const metadata: Metadata = {
+            title: 'Issue Tracker - Dashboard',
+            description: 'View a summary of project issues',
+        }
+    Dynamic:
+        export async function generateMetadata({ params }: Props) {
+            const issue = await prisma.issue.findUnique({ where: { id: parseInt(params.id) } })
+            return {
+                title: issue?.title,
+                description: `Details of issue id: ${issue?.id}`
+            }
+        }
 
 
 
